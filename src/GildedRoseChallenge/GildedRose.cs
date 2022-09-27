@@ -67,13 +67,13 @@ public class InventoryItems {
     item.SellIn--;
 
   private void UpdateBackstagePass(Item item) {
-    var newQuality = 1;
+    int newQuality;
     if (item.SellIn < 0) {
       newQuality = -item.Quality;
     } else {
       var todaySellIn = item.SellIn + 1;
-      newQuality += todaySellIn < 11 ? 1 : 0;
-      newQuality += todaySellIn < 6 ? 1 : 0;
+      newQuality = todaySellIn <= 10 ? 2 : 1;
+      newQuality = todaySellIn <= 5 ? 3 : newQuality;
     }
     UpdateQuality(item, newQuality);
   }
