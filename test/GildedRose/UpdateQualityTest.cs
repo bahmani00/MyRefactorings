@@ -33,7 +33,7 @@ public class UpdateQualityTest {
 
 
   [Fact]
-  public void Update_sell_in_is_below_0_reduces_the_quality_by_2() {
+  public void Update_SellIn_is_below_0_reduces_the_quality_by_2() {
     var item = new Item("Haunted Shoe", 0, 10);
     var inventoryItems = new InventoryItems();
 
@@ -51,7 +51,7 @@ public class UpdateQualityTest {
   }
 
   [Fact]
-  public void Update_Aged_Brie_sell_in_is_below_0_increases_the_quality_by_2() {
+  public void Update_Aged_Brie_SellIn_is_below_0_increases_the_quality_by_2() {
     var item = new Item("Aged Brie", 0, 10);
     var inventoryItems = new InventoryItems();
 
@@ -69,7 +69,7 @@ public class UpdateQualityTest {
   }
 
   [Fact]
-  public void UpdateBackstagePass_when_the_sell_in_is_larger_than_10_increases_the_quality_by_1() {
+  public void Update_Backstage_Pass_when_the_SellIn_is_larger_than_10_increases_the_quality_by_1() {
     var item = new Item("Backstage passes to a TAFKAL80ETC concert", 11, 10);
     var inventoryItems = new InventoryItems();
 
@@ -78,7 +78,7 @@ public class UpdateQualityTest {
   }
 
   [Fact]
-  public void UpdateBackstagePass_when_the_sell_in_is_10_or_less_increases_the_quality_by_2() {
+  public void Update_Backstage_Pass_when_the_SellIn_is_10_or_less_increases_the_quality_by_2() {
     var item = new Item("Backstage passes to a TAFKAL80ETC concert", 10, 10);
     var inventoryItems = new InventoryItems();
 
@@ -87,7 +87,16 @@ public class UpdateQualityTest {
   }
 
   [Fact]
-  public void UpdateBackstagePass_when_the_sell_in_is_5_or_less_increases_the_quality_by_3() {
+  public void Update_BackstagePass_not_passes_50() {
+    var item = new Item("Backstage passes to a TAFKAL80ETC concert", 5, 48);
+    var inventoryItems = new InventoryItems();
+
+    inventoryItems.UpdateQuality(new[] { item });
+    Assert.Equal(50, item.Quality);
+  }
+
+  [Fact]
+  public void Update_Backstage_Pass_when_the_SellIn_is_5_or_less_increases_the_quality_by_3() {
     var item = new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10);
     var inventoryItems = new InventoryItems();
 
@@ -96,11 +105,31 @@ public class UpdateQualityTest {
   }
 
   [Fact]
-  public void UpdateBackstagePass_when_the_sell_in_is_0_or_less_reduces_the_quality_to_0() {
+  public void Update_Backstage_Pass_when_the_SellIn_is_0_or_less_reduces_the_quality_to_0() {
     var item = new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10);
     var inventoryItems = new InventoryItems();
 
     inventoryItems.UpdateQuality(new[] { item });
     Assert.Equal(0, item.Quality);
+  }
+
+
+  [Fact]
+  public void Update_Conjured_reduces_quality_by_2() {
+    var item = new Item("Conjured", 10, 10);
+    var inventoryItems = new InventoryItems();
+
+    inventoryItems.UpdateQuality(new[] { item });
+    Assert.Equal(8, item.Quality);
+  }
+
+
+  [Fact]
+  public void Update_Conjured_SellIn_is_below_0_reduces_the_quality_by_4() {
+    var item = new Item("Conjured", 0, 10);
+    var inventoryItems = new InventoryItems();
+
+    inventoryItems.UpdateQuality(new[] { item });
+    Assert.Equal(6, item.Quality);
   }
 }
