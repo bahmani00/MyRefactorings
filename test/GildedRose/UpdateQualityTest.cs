@@ -1,5 +1,5 @@
 
-using Console.GildedRoseChallenge;
+using Challenges.GildedRoseChallenge;
 
 namespace Test.GildedRose;
 

@@ -1,4 +1,4 @@
-﻿namespace Console.GildedRoseChallenge;
+﻿namespace Challenges.GildedRoseChallenge;
 
 // Item constructor. DO NOT MODIFY OR THE GOBLIN WILL EAT YOU!
 public class Item {
