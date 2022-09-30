@@ -1,4 +1,4 @@
-﻿namespace Console.GildedRoseChallenge;
+﻿namespace Challenges.GildedRoseChallenge;
 
 // Item constructor. DO NOT MODIFY OR THE GOBLIN WILL EAT YOU!
 public class Item {
@@ -8,7 +8,7 @@ public class Item {
     Quality = quality;
   }
 
-  public string Name { get; set; }
+  public string Name { get; }
   public int SellIn { get; set; }
   public int Quality { get; set; }
 }
@@ -32,49 +32,72 @@ update_Quality(items);
 public class InventoryItems {
   public void UpdateQuality(Item[] items) {
     for (var i = 0; i < items.Length; i++) {
-      if (items[i].Name != "Aged Brie" && items[i].Name != "Backstage passes to a TAFKAL80ETC concert") {
-        if (items[i].Quality > 0) {
-          if (items[i].Name != "Sulfuras, Hand of Ragnaros") {
-            items[i].Quality = items[i].Quality - 1;
-          }
-        }
-      } else {
-        if (items[i].Quality < 50) {
-          items[i].Quality = items[i].Quality + 1;
-          if (items[i].Name == "Backstage passes to a TAFKAL80ETC concert") {
-            if (items[i].SellIn < 11) {
-              if (items[i].Quality < 50) {
-                items[i].Quality = items[i].Quality + 1;
-              }
-            }
-            if (items[i].SellIn < 6) {
-              if (items[i].Quality < 50) {
-                items[i].Quality = items[i].Quality + 1;
-              }
-            }
-          }
-        }
-      }
-      if (items[i].Name != "Sulfuras, Hand of Ragnaros") {
-        items[i].SellIn = items[i].SellIn - 1;
-      }
-      if (items[i].SellIn < 0) {
-        if (items[i].Name != "Aged Brie") {
-          if (items[i].Name != "Backstage passes to a TAFKAL80ETC concert") {
-            if (items[i].Quality > 0) {
-              if (items[i].Name != "Sulfuras, Hand of Ragnaros") {
-                items[i].Quality = items[i].Quality - 1;
-              }
-            }
-          } else {
-            items[i].Quality = items[i].Quality - items[i].Quality;
-          }
-        } else {
-          if (items[i].Quality < 50) {
-            items[i].Quality = items[i].Quality + 1;
-          }
-        }
-      }
+      UpdateQuality(items[i]);      
     }
   }
+
+  public void UpdateQuality(Item item) {
+    if (IsLegendary(item)) return;
+
+    DecrementSellIn(item);
+
+    if (IsAgedBrie(item)) {
+      UpdateAgedBrie(item);
+      return;
+    }
+
+    if (IsBackstagePass(item)) {
+      UpdateBackstagePass(item);
+      return;
+    }
+
+    var newQuality = -1;
+    if (item.SellIn < 0)
+      newQuality--;
+
+    if (IsConjured(item)) {
+      newQuality *= 2;
+    }
+
+    UpdateQuality(item, newQuality);
+  }
+
+  private static void DecrementSellIn(Item item) =>
+    //TODO: coordinate with GOBLIN to have DecrementSellIn whithin Item class
+    item.SellIn--;
+
+  private void UpdateBackstagePass(Item item) {
+    int newQuality;
+    if (item.SellIn < 0) {
+      newQuality = -item.Quality;
+    } else {
+      var todaySellIn = item.SellIn + 1;
+      newQuality = todaySellIn <= 10 ? 2 : 1;
+      newQuality = todaySellIn <= 5 ? 3 : newQuality;
+    }
+    UpdateQuality(item, newQuality);
+  }
+
+  private void UpdateAgedBrie(Item item) {
+    var newQuality = 1;
+    if (item.SellIn < 0)
+      newQuality++;
+    UpdateQuality(item, newQuality);
+  }
+
+  private void UpdateQuality(Item item, int newQuality) =>
+    //TODO: coordinate with GOBLIN to have UpdateQuality whithin Item class
+    item.Quality = Math.Min(50, Math.Max(0, item.Quality + newQuality));
+
+  private static bool IsLegendary(Item item) => 
+    item.Name == "Sulfuras, Hand of Ragnaros";
+
+  private static bool IsAgedBrie(Item item) => 
+    item.Name == "Aged Brie";
+
+  private static bool IsBackstagePass(Item item) =>
+    item.Name == "Backstage passes to a TAFKAL80ETC concert";
+
+  private static bool IsConjured(Item item) =>
+    item.Name == "Conjured";
 }
