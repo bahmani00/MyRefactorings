@@ -3,10 +3,29 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <!--<Nullable>enable</Nullable>-->
-
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="..\src\Markdown\marked-down-1.txt" Link="Markdown\marked-down-1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\src\Markdown\marked-up-1.txt" Link="Markdown\marked-up-1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\src\Markdown\marked-down-2.txt" Link="Markdown\marked-down-2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\src\Markdown\marked-up-2.txt" Link="Markdown\marked-up-2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\src\Markdown\marked-down-3.txt" Link="Markdown\marked-down-3.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\src\Markdown\marked-up-3.txt" Link="Markdown\marked-up-3.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />

@@ -1,4 +1,4 @@
-﻿using Challenges.AirTech;
+﻿namespace Challenges.AirTech;
 
 public class FlightSchedulerSample {
   public static void Start() {

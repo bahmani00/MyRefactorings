@@ -36,7 +36,7 @@ public class InventoryItems {
     }
   }
 
-  public void UpdateQuality(Item item) {
+  public static void UpdateQuality(Item item) {
     if (IsLegendary(item)) return;
 
     DecrementSellIn(item);
@@ -66,7 +66,7 @@ public class InventoryItems {
     //TODO: coordinate with GOBLIN to have DecrementSellIn whithin Item class
     item.SellIn--;
 
-  private void UpdateBackstagePass(Item item) {
+  private static void UpdateBackstagePass(Item item) {
     int newQuality;
     if (item.SellIn < 0) {
       newQuality = -item.Quality;
@@ -78,14 +78,14 @@ public class InventoryItems {
     UpdateQuality(item, newQuality);
   }
 
-  private void UpdateAgedBrie(Item item) {
+  private static void UpdateAgedBrie(Item item) {
     var newQuality = 1;
     if (item.SellIn < 0)
       newQuality++;
     UpdateQuality(item, newQuality);
   }
 
-  private void UpdateQuality(Item item, int newQuality) =>
+  private static void UpdateQuality(Item item, int newQuality) =>
     //TODO: coordinate with GOBLIN to have UpdateQuality whithin Item class
     item.Quality = Math.Min(50, Math.Max(0, item.Quality + newQuality));
 

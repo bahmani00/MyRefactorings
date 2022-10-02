@@ -48,8 +48,8 @@ public class FlightSchedulerOptions {
     }
   }
 
-  private int maxNumOfDaysToSchedule;
-  private int numOfBoxPerDay;
+  private readonly int maxNumOfDaysToSchedule;
+  private readonly int numOfBoxPerDay;
 
   public int GetDayNumber(int orderNumber) =>
     Math.Min(maxNumOfDaysToSchedule, 1 + (orderNumber / numOfBoxPerDay));
