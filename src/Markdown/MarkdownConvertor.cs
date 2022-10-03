@@ -15,24 +15,23 @@ public class MarkdownConvertor {
     var lines = markup.SplitToLines().ToArray();
     var markedUpLines = new List<string>();
     var queue = new Queue<string>();
-    for (var i = 0; i < lines.Length; i++) {
-      var line = lines[i];
+    foreach (var line in lines) {
       if (line.IsHeader(out int headerNum)) {
-        ProcessQueue(markedUpLines, queue);
+        ApplyParagraphs(markedUpLines, queue);
         markedUpLines.Add(line.ApplyHeaders(headerNum));
       } else if (line.IsNotNullOrEmpty()) {
         queue.Enqueue(line);
       } else {
-        ProcessQueue(markedUpLines, queue);
+        ApplyParagraphs(markedUpLines, queue);
       }
     }
 
-    ProcessQueue(markedUpLines, queue);
+    ApplyParagraphs(markedUpLines, queue);
 
     return String.Join(NewLine, markedUpLines);
   }
 
-  private static void ProcessQueue(List<string> markedUpLines, Queue<string> queue) {
+  private static void ApplyParagraphs(List<string> markedUpLines, Queue<string> queue) {
     if (queue.Count <= 0) return;
 
     var sb = new StringBuilder();
