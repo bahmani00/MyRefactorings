@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Markdown\marked-down-3.txt" />
+    <None Remove="Markdown\marked-up-3.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="AirTech\coding-assigment-orders.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -21,12 +26,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Markdown\marked-up-2.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Markdown\marked-down-3.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Markdown\marked-up-3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>    
   </ItemGroup>
