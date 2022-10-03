@@ -1,6 +1,6 @@
 
 using Challenges.Markdown;
-using static System.Environment;
+using static Challenges.Markdown.MarkdownConvertorExt;
 
 namespace Test.Markdown;
 

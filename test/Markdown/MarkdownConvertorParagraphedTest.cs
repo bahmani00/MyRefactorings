@@ -1,6 +1,6 @@
 
 using Challenges.Markdown;
-using static System.Environment;
+using static Challenges.Markdown.MarkdownConvertorExt;
 
 namespace Test.Markdown;
 
@@ -47,17 +47,6 @@ public class MarkdownConvertorParagraphedTest {
     actual = convertor.MarkUp();
     Assert.Equal("", actual);
   }
-
-  //[Fact]
-  //public void Markdown_two_lines() {
-  //  var input = content1;
-  //  var convertor = new MarkdownConvertor(input);
-
-  //  var actual = convertor.MarkUp();
-  //  var expected = $"<p>{input}</p>";
-
-  //  Assert.Equal(expected, actual);
-  //}
 
   [Fact]
   public void Markdown_no_empty_lines_raw_input_returns_paragraphed_raw_markup() {

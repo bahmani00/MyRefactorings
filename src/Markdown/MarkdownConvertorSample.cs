@@ -45,7 +45,7 @@ public class MarkdownConvertorSample {
 
   //[Benchmark]
   public string[] Split_BuiltIn() =>
-    markedDown.Split(new[] { TagHelper.NewLine }, StringSplitOptions.None);
+    markedDown.Split(new[] { MarkdownConvertorExt.NewLine }, StringSplitOptions.None);
   
  // [Benchmark]
   public string[] Split_UsingStringReader() =>
